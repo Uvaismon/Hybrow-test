@@ -1,0 +1,40 @@
+{% extends "inventory_management/home.html" %}
+{% load static %}
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" href="{% static 'inventory_management/product.css' %}">
+{% endblock stylesheet %}
+
+{% block body %}
+
+    <div class="ms-4 mt-4 me-4 d-flex justify-content-between">
+        <h1>Locations</h1>
+        <a href=" {% url 'new_location' %} "><button class="btn btn-outline-primary">Add Location</button></a>
+    </div>
+  
+    <div class="list-grpup ms-4 mt-4 me-4 custom-product-list">
+        {% for location in location_list %}
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <p>{{ location.location_id }}</p>
+                    <div>
+                        <a href="{% url 'edit_location' location.location_id %}" class="custom-link">
+                            <img src="{% static 'inventory_management/pen-solid.svg' %}" alt="edit" class="custom-icon me-4">
+                        </a>
+                        <img src="{% static 'inventory_management/trash-alt-solid.svg' %}" alt="delete" class="custom-icon" onclick="delete_dialog('{{location.location_id}}')">
+                    </div>
+                </div>
+                <p> Name: {{ location.location_name }} </p>
+            </div>
+        {% endfor %}
+    </div>
+    <div id="delete-dialog" class="position-absolute top-50 start-50 translate-middle">
+        <p>Confirm delete?</p>
+        <a href="#" class="custom-link"></a><button class="btn btn-outline-danger" onclick="delete_redirect('location')">Delete</button>
+        <button class="btn btn-outline-secondary" onclick="cancel_delete()">Calcel</button>
+    </div>
+    <script src=" {% static 'inventory_management/product.js' %} "></script>
+{% endblock body %}

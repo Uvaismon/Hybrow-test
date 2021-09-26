@@ -1,0 +1,17 @@
+.custom-button {
+    width: 100px !important;
+}
+
+.custom-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.custom-link {
+    text-decoration: none;
+}
+
+.custom-table {
+    width: 90%;
+    margin-left: 5%;
+}

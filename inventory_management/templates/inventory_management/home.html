@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'inventory_management/measurements.css' %}">
+    {% block stylesheet %} {% endblock stylesheet %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% block navbar %}
+        <nav class="navbar sticky-top navbar-light" style="background-color: #C1E1D2;">
+            <div class="ms-2">
+                <a class="navbar-brand" href=" {% url 'products' %} ">Products</a>
+                <a class="navbar-brand" href=" {% url 'locations' %}">Locations</a>
+                <a class="navbar-brand" href=" {% url 'movements' %} ">Movements</a>
+                <a class="navbar-brand" href=" {% url 'summary' %} ">Summary</a>
+            </div>
+        </nav>      
+    {% endblock navbar %}
+
+    {% block body %} {% endblock body %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js"></script>
+</body>
+</html> 

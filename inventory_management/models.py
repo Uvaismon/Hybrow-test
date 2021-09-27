@@ -39,6 +39,18 @@ class ProductMovement(models.Model):
         if self.from_location == self.to_location:
             raise ValidationError('From and to location cannot be same.')
 
+
+        if self.from_location:
+            stock = Stock.objects.get_or_create(location=self.from_location, product=self.product)[0]
+            diff = stock.quantity - self.quantity
+            try:
+                movement = ProductMovement.objects.get(pk=self.pk)
+                diff += movement.quantity
+            except:
+                pass
+            if diff < 0:
+                raise ValidationError('Not enough stock available.')
+
         super(ProductMovement, self).clean(*args, **kwargs)
 
     def save(self, *args, **kwargs):

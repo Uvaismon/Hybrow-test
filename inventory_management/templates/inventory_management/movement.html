@@ -10,39 +10,78 @@
 
 {% block body %}
 
-    <div class="ms-4 mt-4 me-4 d-flex justify-content-between">
-        <h1>Product Movements</h1>
-        <a href=" {% url 'new_movement' %} "><button class="btn btn-outline-primary">Add Product Movements</button></a>
-    </div>
-  
-    <div class="list-grpup ms-4 mt-4 me-4 custom-product-list">
-        {% for movement in productmovement_list %}
-            <div class="list-group-item">
-                <div class="d-flex justify-content-between">
-                    <p>{{ movement.movement_id }}</p>
-                    <div>
-                        <a href="{% url 'edit_movement' movement.movement_id %}" class="custom-link">
-                            <img src="{% static 'inventory_management/pen-solid.svg' %}" alt="edit" class="custom-icon me-4">
-                        </a>
-                        <img src="{% static 'inventory_management/trash-alt-solid.svg' %}" alt="delete" class="custom-icon" onclick="delete_dialog('{{movement.movement_id}}')">
+    <div class="custom-disable">
+        <div class="ms-4 mt-4 me-4 mb-4 d-flex justify-content-between">
+            <h1>Product Movements</h1>
+            <a href=" {% url 'new_movement' %} "><button class="btn btn-outline-primary">Add Product Movements</button></a>
+        </div>
+      
+        <div class="list-grpup ms-4 mt-4 me-4 custom-product-list">
+            {% for movement in productmovement_list %}
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <p>{{ movement.movement_id }}</p>
+                        <div>
+                            <a href="{% url 'edit_movement' movement.movement_id %}" class="custom-link">
+                                <img src="{% static 'inventory_management/pen-solid.svg' %}" alt="edit" class="custom-icon me-4">
+                            </a>
+                            <img src="{% static 'inventory_management/trash-alt-solid.svg' %}" alt="delete" class="custom-icon" onclick="delete_dialog('{{movement.movement_id}}')">
+                        </div>
                     </div>
+                    <p> Timestamp: {{ movement.timestamp }} </p>
+                    {% if movement.from_location %}
+                        <p> From: {{ movement.from_location }} </p>
+                    {% endif %}
+                    {% if movement.to_location %}
+                        <p> To: {{ movement.to_location }} </p>
+                    {% endif %}
+                    <p> Product: {{ movement.product }} </p>
+                    <p> Quantity: {{ movement.quantity }} </p>
                 </div>
-                <p> Timestamp: {{ movement.timestamp }} </p>
-                {% if movement.from_location %}
-                    <p> From: {{ movement.from_location }} </p>
-                {% endif %}
-                {% if movement.to_location %}
-                    <p> To: {{ movement.to_location }} </p>
-                {% endif %}
-                <p> Product: {{ movement.product }} </p>
-                <p> Quantity: {{ movement.quantity }} </p>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+    
+        {% if is_paginated %}
+    
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end mt-4 me-4">
+    
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="/movements?page={{ page_obj.previous_page_number }}">previous</a>
+                        </li>
+    
+                    {% else %}
+                        <li class="page-item disabled">
+                            <p class="page-link">previous</p>
+                        </li>
+                    {% endif %}
+    
+                    <li class="page-item disabled">
+                        <p class="page-link"> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. </p>
+                    </li>
+    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="/movements?page={{ page_obj.next_page_number }}">next</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <p class="page-link">next</p>
+                        </li>
+                    {% endif %}
+                    
+                </ul>
+              </nav>
+    
+        {% endif %}
     </div>
+
     <div id="delete-dialog" class="position-absolute top-50 start-50 translate-middle">
         <p>Confirm delete?</p>
         <a href="#" class="custom-link"></a><button class="btn btn-outline-danger" onclick="delete_redirect('movement')">Delete</button>
         <button class="btn btn-outline-secondary" onclick="cancel_delete()">Calcel</button>
     </div>
+    
     <script src=" {% static 'inventory_management/product.js' %} "></script>
 {% endblock body %}

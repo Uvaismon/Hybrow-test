@@ -92,11 +92,15 @@ class DeleteLocation(DeleteView):
 class MovementPage(ListView):
     template_name = 'inventory_management/movement.html'
     model = ProductMovement
+    paginate_by = 7
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Movements'
         return context
+
+    def get_queryset(self):
+        return ProductMovement.objects.all().order_by('-timestamp')
 
 class NewMovement(CreateView):
     model = ProductMovement

@@ -10,27 +10,30 @@
 
 {% block body %}
 
-    <div class="ms-4 mt-4 me-4 d-flex justify-content-between">
-        <h1>Products</h1>
-        <a href=" {% url 'new_product' %} "><button class="btn btn-outline-primary">Add Product</button></a>
-    </div>
-  
-    <div class="list-grpup ms-4 mt-4 me-4 custom-product-list">
-        {% for product in product_list %}
-            <div class="list-group-item">
-                <div class="d-flex justify-content-between">
-                    <p>{{ product.product_id }}</p>
-                    <div>
-                        <a href="{% url 'edit_product' product.product_id %}" class="custom-link">
-                            <img src="{% static 'inventory_management/pen-solid.svg' %}" alt="edit" class="custom-icon me-4">
-                        </a>
-                        <img src="{% static 'inventory_management/trash-alt-solid.svg' %}" alt="delete" class="custom-icon" onclick="delete_dialog('{{product.product_id}}')">
+    <div class="custom-disable">
+        <div class="ms-4 mt-4 me-4 d-flex justify-content-between">
+            <h1>Products</h1>
+            <a href=" {% url 'new_product' %} "><button class="btn btn-outline-primary">Add Product</button></a>
+        </div>
+      
+        <div class="list-grpup ms-4 mt-4 me-4 custom-product-list">
+            {% for product in product_list %}
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <p>{{ product.product_id }}</p>
+                        <div>
+                            <a href="{% url 'edit_product' product.product_id %}" class="custom-link">
+                                <img src="{% static 'inventory_management/pen-solid.svg' %}" alt="edit" class="custom-icon me-4">
+                            </a>
+                            <img src="{% static 'inventory_management/trash-alt-solid.svg' %}" alt="delete" class="custom-icon" onclick="delete_dialog('{{product.product_id}}')">
+                        </div>
                     </div>
+                    <p> Name: {{ product.product_name }} </p>
                 </div>
-                <p> Name: {{ product.product_name }} </p>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
+
     <div id="delete-dialog" class="position-absolute top-50 start-50 translate-middle">
         <p>Confirm delete?</p>
         <a href="#" class="custom-link"></a><button class="btn btn-outline-danger" onclick="delete_redirect('product')">Delete</button>

@@ -1,3 +1,7 @@
+# Hybrow test
+Warehouse management system  
+<br /> <br/>
+
 > ## Home  
 > Landing page of the webapp. Contains navigation bar to navigate to other pages.   
 > 
@@ -89,3 +93,10 @@
 > | ![Screenshot](./images/summary.png) |
 > | :--: |
 > | *Summary* |
+
+<br/><br/>
+
+## Video Demo
+<br/>  
+
+[![Watch the video](./videos/demo.png)](./videos/demo.mp4)

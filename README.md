@@ -99,4 +99,4 @@ Warehouse management system
 ## Video Demo
 <br/>  
 
-[![Watch the video](./videos/demo.png)](./videos/demo.mp4)
+[![Watch the video](./videos/demo.png)](https://drive.google.com/file/d/1XgBcEhCGfzKlrVvZvbWHhiAx38vvVwHV/view?usp=sharing)
